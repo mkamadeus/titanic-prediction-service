@@ -18,12 +18,6 @@ class Input(BaseModel):
 class Output(BaseModel):
 	prediction : float
 
-print(sess.get_inputs()[0])
-print(sess.get_outputs()[0], sess.get_outputs()[1])
-
-val = sess.run([sess.get_outputs()[0].name], {sess.get_inputs()[0].name: np.array([[3, 0, 0, 0.263238, 0, 1, 0, 1, 0]], dtype=np.float32)})[0]
-
-
 @app.post('/')
 async def root(body : Input):
 	input_name = sess.get_inputs()[0].name
