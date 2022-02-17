@@ -6,7 +6,7 @@ Kaggle notebook can be found [here](https://www.kaggle.com/mkamadeus/titanic-skl
 
 ## What is this repository for?
 
-This reposiotry was made to test several things regarding the conversion of machine learning experiments to a fully working API.
+This repository was made to test several things regarding the conversion of machine learning experiments to a fully working API.
 This was done to know the pain points of experiment conversion.
 
 ## Running the project
