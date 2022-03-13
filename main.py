@@ -5,8 +5,11 @@ import onnxruntime as rt
 import numpy as np
 
 app = FastAPI()
+
+# from model spec
 sess = rt.InferenceSession("titanic.onnx")
 
+# from input spec
 class Input(BaseModel):
 	pclass : float
 	sibsp : float
@@ -15,6 +18,7 @@ class Input(BaseModel):
 	sex : str
 	embarked : str
 
+# from output spec
 class Output(BaseModel):
 	prediction : float
 
@@ -22,7 +26,10 @@ class Output(BaseModel):
 async def root(body : Input):
 	input_name = sess.get_inputs()[0].name
 	label_name = sess.get_outputs()[0].name
-
+	
+	# from pipeline & input spec
+	
+	# ---- BEGIN ----
 	# normal
 	p_1 = np.array([[body.pclass, body.sibsp, body.parch]], dtype=np.float32)
 
@@ -36,6 +43,8 @@ async def root(body : Input):
 	
 	p_final = np.concatenate((p_1, p_2, p_3, p_4), axis=1)
 	
+	# ---- END ----
+
 	prediction = sess.run([label_name], {input_name: p_final})[0]
 	print(p_final)
 
